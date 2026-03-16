@@ -1,13 +1,13 @@
 # Stock-Price-Prediction-Using-LSTM
 
 
-This project is a real-time stock price prediction system built using an LSTM (Long Short-Term Memory) deep learning model. It fetches historical stock data, applies technical indicators, trains an LSTM model, and predicts future stock prices. The project also visualizes actual vs predicted prices and can fetch recent stock-related news headlines.
+This project is a stock price prediction workflow built in a Jupyter notebook using an LSTM (Long Short-Term Memory) model. It fetches historical stock data, applies technical indicators, trains an LSTM model, predicts future prices, and visualizes actual vs predicted prices. It can optionally fetch recent stock-related news headlines.
 
 ---
 
 ##  Features
 
--  **Real-time stock price fetching** from Yahoo Finance, Google Finance, MarketWatch, or Investing.com.
+-  **Stock price fetching** from Yahoo Finance, Google Finance, MarketWatch, or Investing.com.
 -  **LSTM model** to predict next-day stock prices.
 -  **Interactive visualizations** using Plotly and Matplotlib.
 -  **Technical indicators** like RSI, MACD, Bollinger Bands, and EMA.
@@ -16,17 +16,35 @@ This project is a real-time stock price prediction system built using an LSTM (L
 
 ---
 
+##  Architecture
+
+```mermaid
+flowchart LR
+	A[Data Sources\nYahoo / Google / MarketWatch] --> B[Clean & Align\nmissing-value handling]
+	B --> C[Feature Engineering\nEMA / RSI / MACD / Bollinger]
+	C --> D[Scaling\nMinMax]
+	D --> E[LSTM Model\ntrain / validate]
+	E --> F[Predictions]
+	F --> G[Visualization\nMatplotlib / Plotly]
+	F --> H[News Fetch\nrelated headlines]
+```
+
+- **Ingestion**: Pulls latest quotes and historical candles from multiple providers with fallback.
+- **Indicators**: Computes EMA/RSI/MACD/Bollinger for richer temporal features.
+- **Model**: LSTM sequence model trained on scaled price windows; tuned for next-day close.
+- **Outputs**: Predicted price, matplotlib/Plotly charts, and latest related headlines.
+
+---
+
 ##  Project Structure
 
 ```
- StockPricePredictor/
-│
-├── stock_predictor.py      # Main script with StockPredictor class
-├── README.md               # Project documentation
-└── requirements.txt        # Required libraries
+Stock-Price-Prediction-Using-LSTM/
+├── STOCK_PRICE_PREDICTION_USING_LSTM_AND_WEB_SCRAPING.ipynb  # Main notebook
+└── README.md
 ```
 
-> If you're running this on Google Colab, simply copy-paste the class and call methods as shown below.
+> To run in Google Colab, upload the notebook and follow the cells in order.
 
 ---
 
@@ -54,6 +72,18 @@ Scrapes latest headlines related to the company from Google News.
 
 ---
 
+##  Setup (Local)
+
+```bash
+python -m venv .venv
+. .venv/Scripts/activate  # PowerShell: .venv\Scripts\Activate.ps1
+pip install -r requirements.txt  # if present, otherwise install the deps below
+```
+
+Then open the notebook `STOCK_PRICE_PREDICTION_USING_LSTM_AND_WEB_SCRAPING.ipynb` and run the cells sequentially.
+
+---
+
 ##  Example Usage
 
 ```python
@@ -68,7 +98,7 @@ predictor.fetch_news()
 
 ##  Dependencies
 
-Install the following packages if not using Colab:
+Install the following packages if not using Colab (or use `requirements.txt` if available):
 
 ```bash
 pip install yfinance beautifulsoup4 lxml plotly tensorflow scikit-learn
