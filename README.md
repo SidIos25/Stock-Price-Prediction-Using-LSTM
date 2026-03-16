@@ -20,13 +20,13 @@ This project is a stock price prediction workflow built in a Jupyter notebook us
 
 ```mermaid
 flowchart LR
-	A[Data Sources\nYahoo / Google / MarketWatch] --> B[Clean & Align\nmissing-value handling]
-	B --> C[Feature Engineering\nEMA / RSI / MACD / Bollinger]
-	C --> D[Scaling\nMinMax]
-	D --> E[LSTM Model\ntrain / validate]
+	A[Data Sources<br/>Yahoo / Google / MarketWatch] --> B[Clean & Align<br/>missing-value handling]
+	B --> C[Feature Engineering<br/>EMA / RSI / MACD / Bollinger]
+	C --> D[Scaling<br/>MinMax]
+	D --> E[LSTM Model<br/>train / validate]
 	E --> F[Predictions]
-	F --> G[Visualization\nMatplotlib / Plotly]
-	F --> H[News Fetch\nrelated headlines]
+	F --> G[Visualization<br/>Matplotlib / Plotly]
+	F --> H[News Fetch<br/>related headlines]
 ```
 
 - **Ingestion**: Pulls latest quotes and historical candles from multiple providers with fallback.
